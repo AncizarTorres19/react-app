@@ -1,14 +1,32 @@
 import { ProductImage, ProductTitle, ProductButtons, ProducCard } from "../components"
-import { ProducInCart, Product } from '../interfaces/insterfaces';
+import { Product } from '../interfaces/insterfaces';
 import '../styles/custom-styles.css'
 import { useState } from 'react';
 import { products } from "../data/products";
-import { useShoppingCart } from "../hooks/useShoppingCart";
 
+interface ProducInCard extends Product {
+    count: number;   // count of products in cart
+}
 
 export const ShoppingPage = () => {
 
-    const { shoppingCard, onProductCountChange } = useShoppingCart();    // Hook para el carrito de compras
+    const [shoppingCard, setShoppingCard] = useState<{ [key: string]: ProducInCard }>({})
+
+    const onProductCountChange = ({ count, product }: { count: number; product: Product }) => {
+        setShoppingCard(oldShoppingCard => {
+
+            if (count === 0) {
+                const { [product.id]: toDelete, ...rest } = oldShoppingCard  // delete product from shopping card
+                // delete oldShoppingCard[product.id]   // delete product from shoppingCard
+
+                return rest // return rest of the shopping card
+            }
+            return {
+                ...oldShoppingCard, // copy all old products
+                [product.id]: { ...product, count } // add new product with new count
+            }
+        })
+    }
 
     return (
         <div>
