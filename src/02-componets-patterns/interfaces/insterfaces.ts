@@ -23,3 +23,8 @@ export interface onChangeArgs {
     product: Product;
     count: number;
 }
+
+
+export interface ProducInCart extends Product {
+    count: number;   // count of products in cart
+}
