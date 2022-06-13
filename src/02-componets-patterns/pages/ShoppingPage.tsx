@@ -1,9 +1,7 @@
 import { ProductImage, ProductTitle, ProductButtons, ProducCard } from "../components"
-import { ProducInCart, Product } from '../interfaces/insterfaces';
-import '../styles/custom-styles.css'
-import { useState } from 'react';
 import { products } from "../data/products";
 import { useShoppingCart } from "../hooks/useShoppingCart";
+import '../styles/custom-styles.css'
 
 
 export const ShoppingPage = () => {
