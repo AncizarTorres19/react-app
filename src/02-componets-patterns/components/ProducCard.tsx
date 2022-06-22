@@ -1,4 +1,4 @@
-import { createContext, CSSProperties, ReactElement } from 'react';
+import { createContext, CSSProperties } from 'react';
 
 import { ProductContextProps, Product, onChangeArgs, InitialValues, ProducCardHandlers } from '../interfaces/insterfaces';
 import { useProduct } from '../hooks/useProduct';
@@ -12,7 +12,6 @@ const { Provider } = ProductContext
 
 export interface Props {
     product: Product;   // Product object
-    // children?: ReactElement | ReactElement[];   // children is a ReactNode
     children?: (args:ProducCardHandlers) => JSX.Element | JSX.Element[];   // children is a ReactNode
     className?: string; // className of the component
     style?: CSSProperties;  // style prop is used to set the style of the component
