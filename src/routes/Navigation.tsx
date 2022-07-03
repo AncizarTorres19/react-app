@@ -31,15 +31,6 @@ export const Navigation = () => {
                         <li>
                             <NavLink to="/formik-abstraction" className={({ isActive }) => isActive ? 'nav-active' : ''}>Formik Abstraction</NavLink>
                         </li>
-                        <li>
-                            <NavLink to="/Home" className={({ isActive }) => isActive ? 'nav-active' : ''}>Home</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-active' : ''}>About</NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/users" className={({ isActive }) => isActive ? 'nav-active' : ''}>Users</NavLink>
-                        </li>
                     </ul>
                 </nav>
 
@@ -49,10 +40,7 @@ export const Navigation = () => {
                     <Route path="/formik-yup" element={<FormikYupPage />} />
                     <Route path="/formik-components" element={<FormikComponents />} />
                     <Route path="/formik-abstraction" element={<FormikAbstraction />} />
-                    <Route path="about" element={<h1>About</h1>} />
-                    <Route path="users" element={<h1>Users</h1>} />
-                    <Route path="Home" element={<h1>Home</h1>} />
-                    <Route path="/*" element={<Navigate to="/home" replace />} />
+                    <Route path="/*" element={<Navigate to="/register" replace />} />
                 </Routes>
             </div>
         </BrowserRouter>
