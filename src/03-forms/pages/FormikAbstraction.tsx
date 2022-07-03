@@ -1,12 +1,13 @@
-import { Formik, Field, ErrorMessage, Form } from 'formik';
+import { Formik, Form } from 'formik';
 import * as Yup from 'yup'
+import { MyCheckbox, MySelect, MyTextInput } from '../components';
+
 import '../styles/styles.css';
 
-export const FormikComponents = () => {
+export const FormikAbstraction = () => {
     return (
         <div>
             <h1>Formik Components</h1>
-
             <Formik
                 initialValues={{
                     firstName: '',
@@ -43,34 +44,34 @@ export const FormikComponents = () => {
             >
                 {(formik) => (
                     <Form>
-                        <label htmlFor='firstName'>First Name</label>
-                        <Field name='firstName' type='text' />
-                        <ErrorMessage name='firstName' component='span' />
-
-                        <label htmlFor='lastName'>Last Name</label>
-                        <Field name='lastName' type='text' />
-                        <ErrorMessage name='lastName' component='span' />
-
-                        <label htmlFor='email'>Email Address</label>
-                        <Field name='email' type='text' />
-                        <ErrorMessage name='email' component='span' />
-
-                        <label htmlFor='jobType'>Job Type</label>
-                        <Field name='jobType' as='select'>
+                        <MyTextInput
+                            label='First Name'
+                            name='firstName'
+                            placeholder='Ancizar'
+                        />
+                        <MyTextInput
+                            label='Last Name'
+                            name='lastName'
+                            placeholder='Torres'
+                        />
+                        <MyTextInput
+                            label='Last Name'
+                            name='email'
+                            placeholder='ancizar@gmail.com'
+                            type='email'
+                        />
+                        <MySelect label='Job Type' name='jobType'>
                             <option value=''>Pick something</option>
                             <option value='developer'>Developer</option>
                             <option value='designer'>Designer</option>
                             <option value='it-senior'>IT senior</option>
                             <option value='it-jr'>IT jr.</option>
-                        </Field>
-                        <ErrorMessage name='jobType' component='span' />
+                        </MySelect>
 
-                        <label>
-                            <Field name='terms' type='checkbox' />
-                            Terms  and conditions
-                        </label>
-                        <ErrorMessage name='terms' component='span' />
-
+                        <MyCheckbox
+                            label='Terms & conditions'
+                            name='terms'
+                        />
                         <button type="submit">
                             Submit
                         </button>
