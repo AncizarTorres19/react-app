@@ -1,20 +1,19 @@
 import { Formik, Form } from 'formik';
 import * as Yup from 'yup'
-import { MyCheckbox, MySelect, MyTextInput } from '../components';
-
+import { MyTextInput } from '../components';
 import '../styles/styles.css';
 
-export const FormikAbstraction = () => {
+export const RegisterFormik = () => {
     return (
         <div>
-            <h1>Formik Components</h1>
+            <h1>Register Formik</h1>
             <Formik
                 initialValues={{
                     firstName: '',
                     lastName: '',
                     email: '',
-                    terms: false,
-                    jobType: ''
+                    password: '',
+                    repeat_password: ''
                 }}
                 onSubmit={(values) => {
                     console.log(values);
@@ -23,26 +22,30 @@ export const FormikAbstraction = () => {
                     Yup.object({
                         firstName:
                             Yup.string()
+                                .min(2, 'Must be 2 characters or more')
                                 .max(15, 'Must be 15 characters or less')
                                 .required('Required'),
                         lastName:
                             Yup.string()
-                                .max(10, 'Must be 10 characters or less')
+                                .min(2, 'Must be 2 characters or more')
+                                .max(15, 'Must be 15 characters or less')
                                 .required('Required'),
                         email:
                             Yup.string()
                                 .required('Required')
                                 .email('Invalid email address'),
-                        terms:
-                            Yup.boolean()
-                                .oneOf([true], 'You must accept the conditions'),
-                        jobType:
+                        password:
                             Yup.string()
                                 .required('Required')
-                                .notOneOf(['it-jr'], 'This option is not allowed.'),
+                                .min(6, 'Must be 6 characters or more'),
+                        repeat_password:
+                            Yup.string()
+                                .oneOf([Yup.ref('password')], 'Passwords are not the same')
+                                .required('Required')
+                                .min(6, 'Must be 6 characters or more'),
                     })}
             >
-                {(formik) => (
+                {({ handleReset }) => (
                     <Form>
                         <MyTextInput
                             label='First Name'
@@ -55,25 +58,28 @@ export const FormikAbstraction = () => {
                             placeholder='Torres'
                         />
                         <MyTextInput
-                            label='Email Address'
+                            label='Last Name'
                             name='email'
                             placeholder='ancizar@gmail.com'
                             type='email'
                         />
-                        <MySelect label='Job Type' name='jobType'>
-                            <option value=''>Pick something</option>
-                            <option value='developer'>Developer</option>
-                            <option value='designer'>Designer</option>
-                            <option value='it-senior'>IT senior</option>
-                            <option value='it-jr'>IT jr.</option>
-                        </MySelect>
-
-                        <MyCheckbox
-                            label='Terms & conditions'
-                            name='terms'
+                        <MyTextInput
+                            label='Password'
+                            name='password'
+                            placeholder='******'
+                            type='password'
+                        />
+                        <MyTextInput
+                            label='Repeat Password'
+                            name='repeat_password'
+                            placeholder='******'
+                            type='password'
                         />
                         <button type="submit">
                             Submit
+                        </button>
+                        <button type="button" onClick={handleReset}>
+                            resetForm
                         </button>
                     </Form>
                 )}
